@@ -20,11 +20,12 @@ var sortedSquares = function(nums) {
     return nums;
     */
 
+    
     let n = nums.length
-    let result = new Array();
     for(let i=0; i<n; i++){
-        result.push(nums[i] **2);
+        nums[i] = nums[i] **2;
     }
-    result.sort((x,y) => x-y);
-    return result;
+    nums.sort((x,y) => x-y);
+    return nums;
+
 };
