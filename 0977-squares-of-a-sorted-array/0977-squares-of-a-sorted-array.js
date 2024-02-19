@@ -20,12 +20,30 @@ var sortedSquares = function(nums) {
     return nums;
     */
 
-    
+    /* brute force way
     let n = nums.length
     for(let i=0; i<n; i++){
         nums[i] = nums[i] **2;
     }
     nums.sort((x,y) => x-y);
     return nums;
+    */
+
+    // optimized way
+
+    let n = nums.length;
+    let result = new Array(n)
+    let left = 0;
+    let right = n-1;
+    for(let i=n-1; i>=0; i--){
+        if(nums[left] **2 < nums[right] **2){
+            result[i] = nums[right] **2;
+            right--;
+        }else{
+            result[i] = nums[left] **2;
+            left++
+        }
+    }
+    return result;
 
 };
