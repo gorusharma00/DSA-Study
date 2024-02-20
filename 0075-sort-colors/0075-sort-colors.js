@@ -14,5 +14,4 @@ var sortColors = function(nums) {
             }
         }
     }
-    return nums;
 };
