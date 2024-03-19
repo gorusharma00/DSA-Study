@@ -4,7 +4,9 @@
  * @return {number[]}
  */
 var intersection = function(nums1, nums2) {
-    // map apporach think by me
+    // map apporach think by me  time=> O(n+m) space=> o(n)
+    // set approach can also be used
+    // delete operator can be used instead of --;
     let result = [];
     const map = {};
     for(let i=0; i<nums1.length; i++){
@@ -20,4 +22,6 @@ var intersection = function(nums1, nums2) {
         }
     }
     return result;
+
+
 };
