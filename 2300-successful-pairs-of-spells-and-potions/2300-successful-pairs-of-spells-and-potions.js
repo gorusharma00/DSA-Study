@@ -31,19 +31,20 @@ var successfulPairs = function(spells, potions, success) {
     potions.sort((x,y) => x-y);
 
     
-    let m = spells.length;
-    let n = potions.length;
+    let i = 0;
+    let j = potions.length-1;
+    let count = 0;
 
-    for(let i=0; i<m; i++){
-        let count = 0;
-        let j = n-1;
-        while(j>=0 && spells[i][0] * potions[j] >= success){
+    while(i < spells.length){
+        if(j>=0 && spells[i][0] * potions[j] >= success){
+            count++;
             j--;
+        }else{
+            result[spells[i][1]] = count;
+            i++;
         }
-        count = n-(j+1);
-        result[spells[i][1]] = count;
+       
     }
-
     return result;
 };
 
