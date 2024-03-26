@@ -2,6 +2,7 @@ class Solution {
     public int[] successfulPairs(int[] spells, int[] potions, long success) {
         Arrays.sort(potions);
         // it can also be solved with out taking new array and by alter spells 
+        // time complexity => O(mlogm + nlogm)
         int[] result = new int[spells.length];
         for(int i=0; i<spells.length; i++){
             int lo = 0;
