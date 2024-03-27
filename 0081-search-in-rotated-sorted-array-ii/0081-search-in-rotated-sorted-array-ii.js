@@ -29,5 +29,5 @@ var search = function(nums, target) {
             }
         }
     }
-    return nums[left] == target;
+    return false;
 };
