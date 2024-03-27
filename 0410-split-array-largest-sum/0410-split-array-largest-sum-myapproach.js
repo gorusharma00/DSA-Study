@@ -29,16 +29,16 @@ var splitArray = function(nums, k) {
 };
 
 function maxSum_in_k(nums, mid, k){
-    let count = 0;
+    let split = 0;
     let sum_el= 0
 
     for(let i=0; i<nums.length; i++){
         if(sum_el + nums[i] > mid){
-            count++;
+            split++;
             sum_el = 0
         }
         sum_el += nums[i]
     }
-    count++;
-    return count <= k;
+    split++;
+    return split <= k;
 }
