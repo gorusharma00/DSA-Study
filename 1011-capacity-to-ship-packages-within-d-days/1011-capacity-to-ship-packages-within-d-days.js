@@ -4,6 +4,7 @@
  * @return {number}
  */
 var shipWithinDays = function(weights, days) {
+    // time complexity => o(n log(sum of weights))
     let totalWeight = 0;
     let maxWeight = -1;
     for(let i=0; i<weights.length; i++){
