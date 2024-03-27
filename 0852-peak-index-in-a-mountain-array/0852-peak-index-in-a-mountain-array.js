@@ -12,7 +12,7 @@ var peakIndexInMountainArray = function(arr) {
         if(arr[mid] > arr[mid+1]){
             hi = mid-1;
         }else{
-            lo = mid
+            lo = mid+1;
         }
     }
     return lo;
