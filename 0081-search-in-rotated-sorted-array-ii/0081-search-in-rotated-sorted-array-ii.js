@@ -16,18 +16,18 @@ var search = function(nums, target) {
             left++;
             right--;
         }else if(nums[mid] >= nums[left]){
-            if(nums[mid] >= target && nums[left] <= target){
+            if(nums[mid] > target && nums[left] <= target){
                 right = mid -1;
             }else{
                 left = mid+1;
             }
         }else{
-            if(nums[mid] <= target && nums[right] >= target){
+            if(nums[mid] < target && nums[right] >= target){
                 left = mid+1;
             }else{
                 right = mid-1;
             }
         }
     }
-    return false;
+    return nums[left] == target;
 };
