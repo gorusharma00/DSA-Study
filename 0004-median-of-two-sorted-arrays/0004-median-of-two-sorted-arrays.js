@@ -17,18 +17,18 @@ var findMedianSortedArrays = function(nums1, nums2) {
         let cut1 = Math.floor((low+high)/2);           // parition of left half 
         let cut2 = left - cut1;    //parition of right half ** n1 + n2 +1 is taken because in odd case but this formula works for  both
 
-        // let left1 = cut1 == 0 ? Number.MIN_VALUE : nums1[cut1 - 1]  // take min if no element is taken and we want l1 before parition line
-        // let left2 = cut2 == 0 ? Number.MIN_VALUE : nums2[cut2 -1]
+        let left1 = cut1 == 0 ?  Number.MIN_SAFE_INTEGER : nums1[cut1 - 1]  // take min if no element is taken and we want l1 before parition line
+        let left2 = cut2 == 0 ?  Number.MIN_SAFE_INTEGER : nums2[cut2 -1]
 
-        // let right1 = cut1 == n1 ? Number.MAX_VALUE : nums1[cut1]   // if no element , we take max number it can help to achieve our intutuion
-        // let right2 = cut2 == n2 ? Number.MAX_VALUE : nums2[cut2]
+        let right1 = cut1 == n1 ? Number.MAX_SAFE_INTEGER : nums1[cut1]   // if no element , we take max number it can help to achieve our intutuion
+        let right2 = cut2 == n2 ? Number.MAX_SAFE_INTEGER : nums2[cut2]
         
-        let left1 = Number.MIN_SAFE_INTEGER, left2 = Number.MIN_SAFE_INTEGER;
-        let right1 = Number.MAX_SAFE_INTEGER, right2 = Number.MAX_SAFE_INTEGER;
-        if (cut1 < n1) right1 = nums1[cut1];
-        if (cut2 < n2) right2 = nums2[cut2];
-        if (cut1 - 1 >= 0) left1 = nums1[cut1 - 1];
-        if (cut2 - 1 >= 0) left2 = nums2[cut2 - 1];
+        // let left1 = Number.MIN_SAFE_INTEGER, left2 = Number.MIN_SAFE_INTEGER;
+        // let right1 = Number.MAX_SAFE_INTEGER, right2 = Number.MAX_SAFE_INTEGER;
+        // if (cut1 < n1) right1 = nums1[cut1];
+        // if (cut2 < n2) right2 = nums2[cut2];
+        // if (cut1 - 1 >= 0) left1 = nums1[cut1 - 1];
+        // if (cut2 - 1 >= 0) left2 = nums2[cut2 - 1];
 
 
         if(left1 <= right2 && left2 <= right1){
