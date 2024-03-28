@@ -4,6 +4,7 @@
  * @return {number}
  */
 var findMedianSortedArrays = function(nums1, nums2) {
+    // time complexity is => o(n+m) and required is o(log(m+n))
     let merge_arr = [];
     let n = nums1.length;
     let m = nums2.length;
