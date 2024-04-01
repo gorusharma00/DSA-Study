@@ -37,6 +37,7 @@ class Solution {
 
 
 //time complexity => O(n * amount)
+// space complexity => O(amount);
 
 // as amount length is 10^4 (means in worst case we have that unique subproblems and 
 //  at subproblem we have loop of coin length means n s0 10^4 * 12 ~ 10^5)
