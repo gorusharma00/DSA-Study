@@ -13,6 +13,8 @@ class Solution {
         for(int i = 0; i < c.length ; i++){
             if(n >= c[i]){
                 ans = Math.min(ans, f(n - c[i]));
+            }else{
+                break;
             }
         }
 
