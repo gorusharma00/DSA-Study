@@ -1,32 +1,35 @@
 class Solution {
-    public static int[] c;
-    public static int last_day;
-    public static HashSet<Integer> s;
     public static int[] dp;
+    public static int last_day;
+    public static int[] c;
+    public static HashSet<Integer> s;
 
-    public static int f(int day){
-        if( day > last_day) return 0;
-        if(!s.contains(day)) return f(day+1);
+    public static int f_bu(){
+        dp = new int[400];
 
-        if(dp[day] != -1) return dp[day];
-
-        int a = Math.min(c[0] + f(day +1), c[1] + f(day +7));
-        int ans = Math.min(a, c[2] + f(day + 30));
-        return dp[day] = ans;
+        for(int day=365; day>= 1; day--){
+            if(day > last_day) dp[day] = 0;
+            else if(!s.contains(day)) dp[day] = dp[day+1];
+            else{
+                int ans = Math.min(c[0] + dp[day+1], Math.min(c[1] + dp[day+7], c[2] + dp[day+30]));
+                dp[day] = ans;
+            }       
+        }
+        return dp[1];
     }
 
     public int mincostTickets(int[] days, int[] costs) {
+        c = costs;
+        last_day = days[days.length -1]; 
+
         s = new HashSet<Integer>();
         for(int day : days){
             s.add(day);
         }
 
-        dp = new int[400];
-        Arrays.fill(dp, -1);
-        
-        c = costs;
-        last_day = days[days.length - 1];
-        int ans = f(1);
-        return ans;
+        return f_bu();
+
     }
 }
+
+//time complexity => o(1);
