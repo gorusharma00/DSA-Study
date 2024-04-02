@@ -27,6 +27,6 @@ class Solution {
         dp = new int[10005];
         Arrays.fill(dp, -1);
         int ans = f(n);
-        return (ans == Integer.MAX_VALUE)? -1 : ans;
+        return ans;
     }
 }
