@@ -2,7 +2,9 @@
  * @param {number} n
  * @return {number}
  */
+let dp;
 var climbStairs = function(n) {
+    dp = new Array(50).fill(-1);
     return f(n);
 };
 
@@ -12,6 +14,9 @@ function f(n){
         return 1;
     }
 
-    return f(n-1) + f(n-2);
-    
+    if(dp[n] != -1) return dp[n]
+
+    return dp[n] = f(n-1) + f(n-2);
 }
+
+//time complexity => O(n)
