@@ -41,3 +41,11 @@ class Solution {
         return ans;
     }
 }
+
+ /*
+
+ time complexity => O(n  * sqrt(n)); // beacuse we are memoizing the the results value from 1 to n so there are n subproblems
+ and we iterate over the sqaure numbers for each n subproblems;
+
+ space complexity => o(n)
+*/  
