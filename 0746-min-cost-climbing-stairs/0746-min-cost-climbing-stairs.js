@@ -6,7 +6,7 @@
 let c;
 let dp;
 var minCostClimbingStairs = function (cost) {
-    dp = Array(1005).fill(-1);
+    dp = Array(cost.length).fill(-1);
 
     c = cost
     let first = f(0);
@@ -26,3 +26,8 @@ function f(i) {
 
     return dp[i] = Math.min(first, second);
 }
+
+
+// space complexity => o(cost.length);
+
+// time complexity => o(n)
