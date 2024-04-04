@@ -3,37 +3,20 @@
  * @return {number}
  */
 var deleteAndEarn = function(nums) {
-    let map = {};
-    for(let i = 0; i<nums.length; i++){
-        if(map[nums[i]]){
-            map[nums[i]]++;
-        }else{
-            map[nums[i]] = 1;
-        }
+    let sum = new Array(10001).fill(0);
+    let dp = new Array(10001).fill(0);
+
+    // Sum up the values for each number in nums
+    for (let num of nums) {
+        sum[num] += num;
     }
 
-    nums = [...new Set(nums)] ;
-    nums.sort((a,b) => a - b);
+    dp[1] = sum[1];
 
-    let earn1, earn2 = 0;
-
-    for(let i = 0; i<nums.length; i++){
-        let currEarn = nums[i] * map[nums[i]]
-
-        if(i > 0 && nums[i] == nums[i-1] + 1){  
-            let temp = earn2;
-            earn2 = Math.max(currEarn + earn1 , earn2);
-            earn1 = temp;
-        }else{
-            let temp = earn2;
-            earn2 = currEarn + earn2;
-            earn1 = temp;
-        }
+    // Dynamic programming to decide whether to take or skip each number
+    for (let i = 2; i < 10001; i++) {
+        dp[i] = Math.max(dp[i - 1], dp[i - 2] + sum[i]);
     }
-    return earn2;
 
+    return dp[10000];
 };
-
-
-// time complexity => o(nlogn)
-// space complexity => o(n);
