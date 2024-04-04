@@ -33,3 +33,7 @@ var deleteAndEarn = function(nums) {
     return earn2;
 
 };
+
+
+// time complexity => o(nlogn)
+// space complexity => o(n);
