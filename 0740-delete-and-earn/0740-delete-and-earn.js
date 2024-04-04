@@ -2,21 +2,25 @@
  * @param {number[]} nums
  * @return {number}
  */
+let dp;
+let sum;
 var deleteAndEarn = function(nums) {
-    let sum = new Array(10001).fill(0);
-    let dp = new Array(10001).fill(0);
+    dp = Array(10001).fill(-1);
+    sum = Array(10001).fill(0);
 
-    // Sum up the values for each number in nums
-    for (let num of nums) {
+    for(let num of nums){
         sum[num] += num;
     }
 
-    dp[1] = sum[1];
-
-    // Dynamic programming to decide whether to take or skip each number
-    for (let i = 2; i < 10001; i++) {
-        dp[i] = Math.max(dp[i - 1], dp[i - 2] + sum[i]);
-    }
-
-    return dp[10000];
+    return f(10000);
 };
+
+function f(i){
+    if(i<= 0) return 0;
+
+    if(dp[i] !== -1) return dp[i];
+
+    dp[i] = Math.max(f(i-1), sum[i] + f(i-2));
+
+    return dp[i];
+}
