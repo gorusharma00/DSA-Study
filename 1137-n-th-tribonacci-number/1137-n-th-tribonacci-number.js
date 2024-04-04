@@ -4,19 +4,19 @@
  */
 let dp;
 var tribonacci = function(n) {
-    dp = Array(40).fill(-1);
     return f(n);
 };
 
 function f(n){
-    let ans;
-    if(n == 0) return 0;
-    if(n== 1 || n== 2 ) return 1;
-    if(dp[n] != -1) return dp[n]
+    dp = Array(40).fill(0);
+    
+    dp[0] = 0;
+    dp[1] = 1;
+    dp[2] = 1;
 
-    if(n >= 3){
-      ans = f(n-1) + f(n-2) + f(n-3);
+    for(let i = 3; i<=n; i++){
+      dp[i] = dp[i-1] + dp[i-2] + dp[i-3];
     }
 
-    return dp[n] = ans;
+    return dp[n];
 }
