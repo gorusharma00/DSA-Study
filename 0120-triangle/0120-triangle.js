@@ -3,7 +3,7 @@
  * @return {number}
  */
 let matrix;
-let dp;
+let dp;  // global variable, so keep recursive function clean
 function f(row, col){
     // base case 
     if(row == matrix.length -1) return matrix[row][col];
@@ -23,3 +23,5 @@ var minimumTotal = function(triangle) {
     return f(0,0);
 };
 
+// Time complexity => O(h^2), where h is the height of the triangle
+// Space complexity => O(h^2), primarily due to the DP array
