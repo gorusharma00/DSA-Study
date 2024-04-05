@@ -3,25 +3,33 @@
  * @return {number}
  */
 let matrix;
-let dp;  // global variable, so keep recursive function clean
-function f(row, col){
-    // base case 
-    if(row == matrix.length -1) return matrix[row][col];
+let dp;
 
-    if(dp[row][col] != -1) return dp[row][col]
+function f_bu(){
+    dp = Array(205);
 
-    return dp[row][col] = matrix[row][col] + Math.min(f(row+1, col) , f(row+1, col+1));
+    for(let i = 0; i < 205; i++){
+        dp[i] = Array(205);
+    }
+
+    let n = matrix.length // total rows
+    //base case
+    for(let i = 0; i < matrix[n-1].length; i++){
+        dp[n-1][i] = matrix[n-1][i];
+    }
+
+    for(let row = n-2; row >= 0; row--){
+        for(let col = 0; col < matrix[row].length; col++){
+            dp[row][col] = matrix[row][col] + Math.min( dp[row+1][col], dp[row+1][col+1]);
+        }
+    }
+
+    return dp[0][0];
 }
+
 
 var minimumTotal = function(triangle) {
     matrix = triangle;
-    dp = Array(205);  // why max length so don't take headache for each test case, this size definitely incorporate everything.
-    for(let i = 0; i< 205; i++){
-        dp[i] = Array(205).fill(-1);
-    }
 
-    return f(0,0);
+    return f_bu();
 };
-
-// Time complexity => O(h^2), where h is the height of the triangle
-// Space complexity => O(h^2), primarily due to the DP array
