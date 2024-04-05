@@ -27,3 +27,7 @@ function f(target){
 
     return dp[target] = ans;
 }
+/* 
+time complexity => O(n * target) because n is size of given array we are iterating over, 
+in each subproblem, which will equal to target + 1
+*/
