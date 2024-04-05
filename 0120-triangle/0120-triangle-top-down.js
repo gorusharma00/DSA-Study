@@ -15,7 +15,7 @@ function f(row, col){
 
 var minimumTotal = function(triangle) {
     matrix = triangle;
-    dp = Array(205);
+    dp = Array(205);  // why max length so don't take headache for each test case, this size definitely incorporate everything.
     for(let i = 0; i< 205; i++){
         dp[i] = Array(205).fill(-1);
     }
