@@ -3,27 +3,29 @@
  * @param {number} target
  * @return {number}
  */
-let n;
 let dp;
+let arr;
 var combinationSum4 = function(nums, target) {
-    dp = Array(1005).fill(-1);
-    n = nums;
-    return f(target)
+    arr = nums;
+    return f_bu(target)
 };
 
-function f(target){
-
-    if(target == 0) return 1;
-
-    if(dp[target] != -1) return dp[target];
+function f_bu(given_target){
+    dp = Array(1005);
     
-    let ans = 0;
+    for(let target = 0; target<= given_target; target++){
+        if(target == 0) dp[target] = 1;
+        else{
+            let n = arr.length
+            let result = 0;
 
-    for(let i = 0; i< n.length; i++){
-        if(target - n[i] >= 0){
-            ans += f(target - n[i]);
+            for(let k = 0; k <= n; k++){
+                if(target - arr[k] >= 0){
+                    result += dp[target - arr[k]];
+                }
+            }
+            dp[target] = result;
         }
     }
-
-    return dp[target] = ans;
+    return dp[given_target]
 }
