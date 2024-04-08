@@ -7,25 +7,30 @@ let arr;
 
 var lengthOfLIS = function(nums) {
     arr = nums;
-    dp.fill(-1);
+    return f_bu();
+};
+
+function f_bu(){
+
+    for(let i = 0; i< arr.length; i++){
+        if(i == 0) dp[i] = 1;
+        else{
+            let result = 1; 
+
+            for(let j = 0; j <= i-1; j++ ){
+                if(arr[j] < arr[i]){
+                    result = Math.max(result, 1 + dp[j]);
+                }
+            }
+            dp[i] = result;
+        }
+    }
 
     let ans = Number.MIN_SAFE_INTEGER;
-    for(let i = 0; i<nums.length; i++){
-        ans = Math.max(ans, f(i))
+    for(let i = 0; i<arr.length; i++){
+        ans = Math.max(ans, dp[i])
     }
 
     return ans;
-};
-
-function f(i){
-    if(i == 0) return 1;
-    if(dp[i] != -1) return dp[i];
-
-    let result = 1;      // minimum value of longest increasing subsequence
-    for(let j = 0; j <= i-1; j++ ){
-        if(arr[j] < arr[i]){
-             result = Math.max(result, 1 + f(j))
-        }
-    }
-    return dp[i] = result;
+    
 }
