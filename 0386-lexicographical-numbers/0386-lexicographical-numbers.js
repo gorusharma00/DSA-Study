@@ -3,12 +3,27 @@
  * @return {number[]}
  */
 var lexicalOrder = function(n) {
-    let arr = new Array(n);
+    let result = [];
 
-    for(let i = 0; i<n; i++){
-        arr[i] = i + 1;
+
+    function f(current){
+        if(current > n){
+            return;
+        }
+        result.push(current);
+        for(let i = 0; i<= 9; i++){
+            if(current * 10 + i> n) return;
+            f(10 * current + i);
+        }
     }
 
-    arr.sort()
-    return arr;
+    for(let i = 1; i <= 9; i++){
+        if(i > n){
+            break;
+        }
+
+        f(i);
+    }
+
+    return result;
 };
