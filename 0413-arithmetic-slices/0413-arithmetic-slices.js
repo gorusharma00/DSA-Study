@@ -26,3 +26,6 @@ function f_bu(){
     }
     return ans;
 }
+
+// time complexity => o(n)
+// space complexity => o(n)
