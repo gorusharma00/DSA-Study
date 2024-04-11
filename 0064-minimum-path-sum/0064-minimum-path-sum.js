@@ -2,30 +2,42 @@
  * @param {number[][]} grid
  * @return {number}
  */
-let matrix;
 let dp;
+let matrix;
 var minPathSum = function(grid) {
     matrix = grid;
-    dp = new Array(grid.length+1);
-    for(let i = 0; i<grid.length+1; i++){
-        dp[i] = new Array(2005).fill(-1);
-    }
-    return f(0,0);
+
+    return f_bu()
 };
 
-function f(row, col){
+function f_bu(){
     let n = matrix.length;
     let m = matrix[0].length;
 
-    if(dp[row][col] != -1) return dp[row][col];
-
-    if(row == n-1 && col == m-1) return matrix[row][col];
-
-    if(row == n-1){
-        return dp[row][col] = matrix[row][col] + f(row, col+1);
-    }else if(col == m-1){
-         return dp[row][col] = matrix[row][col] + f(row+1, col);
-    }else{
-         return dp[row][col] = matrix[row][col] + Math.min(f(row+1, col), f(row, col+1));
+    dp = new Array(205);
+    for(let i = 0; i<205; i++){
+        dp[i] = new Array(205);
     }
+
+    dp[0][0] = matrix[0][0];
+
+   // fill first row
+
+   for(let col = 1; col<m; col++){
+        dp[0][col] = matrix[0][col] + dp[0][col-1]
+   }
+
+   // fill first col
+
+   for(let row = 1; row<n; row++){
+        dp[row][0] = matrix[row][0] + dp[row -1][0];
+   }
+
+   for(let row = 1; row<n; row++){
+        for(let col = 1; col<m; col++){
+            dp[row][col] = matrix[row][col] + Math.min(dp[row-1][col], dp[row][col-1]);
+        }
+   }
+
+    return dp[n-1][m-1];
 }
