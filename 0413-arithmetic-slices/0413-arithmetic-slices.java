@@ -1,29 +1,19 @@
 class Solution {
-    public static int[] arr;
-
-    public static int f_bu(){
-        int[] dp = new int[5005];
+    public int numberOfArithmeticSlices(int[] nums) {
         int ans = 0;
-        for(int i = 0; i<arr.length; i++){
-            if(i == 0 || i == 1) dp[i] = 0;
+        int temp = 0;
+        for(int i = 0; i<nums.length; i++){
+            if(i==0 || i == 1) ans += 0;
             else{
-                if(arr[i] - arr[i-1] != arr[i-1] - arr[i-2]){
-                    dp[i] = 0;
+                if(nums[i] -nums[i-1] != nums[i-1] - nums[i-2]){
+                    ans += 0;
+                    temp = 0;
                 }else{
-                    dp[i] = 1 + dp[i-1];
+                    ans += 1 + temp;
+                    temp += 1 ;
                 }
             }
         }
-
-        for(int i = 0; i<arr.length; i++){
-            ans+= dp[i];
-        }
-
         return ans;
-    }
-
-    public int numberOfArithmeticSlices(int[] nums) {
-        arr = nums;
-        return f_bu();
     }
 }
