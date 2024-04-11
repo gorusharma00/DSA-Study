@@ -6,8 +6,8 @@ let matrix;
 let dp;
 var minPathSum = function(grid) {
     matrix = grid;
-    dp = new Array(205);
-    for(let i = 0; i<205; i++){
+    dp = new Array(grid.length+1);
+    for(let i = 0; i<grid.length+1; i++){
         dp[i] = new Array(2005).fill(-1);
     }
     return f(0,0);
