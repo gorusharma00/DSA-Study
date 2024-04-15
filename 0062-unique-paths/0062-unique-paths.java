@@ -2,27 +2,38 @@ class Solution {
     public static int[][] dp;
     public static int[][] matrix;
 
-    public static int f(int i, int j){
+    public static int f_bu(){
+        dp = new int[105][105];
         int m = matrix.length;
         int n = matrix[0].length;
 
-        if(i >= m || j >= n) return 0;
-        if(i == m-1 && j == n-1) return 1;
+        // base case for first row and column because only one way to reach;
 
-        if(dp[i][j] != 0) return dp[i][j];
+        // first column
+        for(int i = 0; i<= m-1; i++){
+            dp[i][0] = 1;
+        }
 
-        return dp[i][j] = f(i+1, j) + f(i, j+1);
+        // frist row
+        for(int j = 0; j <= n-1; j++){
+            dp[0][j] = 1;
+        }
         
+
+        for(int i = 1; i <= m-1; i++){
+            for(int j = 1; j <= n-1; j++){
+                 dp[i][j] = dp[i-1][j] + dp[i][j-1];
+            }
+        }
+
+        return dp[m-1][n-1];
+
     }
 
     public int uniquePaths(int m, int n) {
         matrix = new int[m][n];
-        dp = new int[105][105];
+        
 
-        for(int i = 0; i< 105; i++){
-            Arrays.fill(dp[i], 0);
-        }
-
-        return f(0,0);
+        return f_bu();
     }
 }
