@@ -27,3 +27,10 @@ class Solution {
         return f(0,0);
     }
 }
+
+// time complexity => O(m * n)
+/*
+space complexity => O(105 * 105) as implemented, 
+                    but more dynamically it would be O(m * n) for the memoization table plus a 
+                    smaller term for the recursive call stack depth, which is often omitted in big O notation.
+*/
