@@ -15,8 +15,9 @@ class Solution {
         }else{
             int max1 = f(i+1, j);
             int max2 = f(i, j+1);
+            int max3 = f(i+1, j+1);
 
-            return dp[i][j] = Math.max(max1, max2);
+            return dp[i][j] = Math.max(max1, Math.max(max2, max3));
         }
     }
 
