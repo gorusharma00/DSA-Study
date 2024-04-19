@@ -18,7 +18,7 @@ class Solution {
                         if(Math.abs(st.peek()) > Math.abs(a[i])){
                             i++;
                         }else{
-                            while(!st.isEmpty() && Math.abs(st.peek()) < Math.abs(a[i])){
+                            while(!st.isEmpty() && st.peek() > 0 && a[i] < 0 && Math.abs(st.peek()) < Math.abs(a[i])){
                                 st.pop();
                             }
                         }
