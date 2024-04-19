@@ -19,5 +19,7 @@ class Solution {
 
         return newString;
     }
+} 
 
-}
+// time complexity => O(n)
+// space complexity => O(n) , think about string which doesn't have star then all strings go in stack.
