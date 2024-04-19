@@ -10,7 +10,7 @@ class Solution {
                 }
                 i++;
             }
-            StringBuilder result = new StringBuilder("");
+            StringBuilder result = new StringBuilder("");  // here it string co catenation is not used because it is expensive opeartion in java
             while(!st.isEmpty()) {
                 result.append(st.peek());
                 st.pop();
