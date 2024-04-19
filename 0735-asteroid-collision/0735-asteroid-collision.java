@@ -1,31 +1,32 @@
 class Solution {
     public int[] asteroidCollision(int[] a) {
         Stack<Integer> st = new Stack<>();
-        int i = 0;
+        int i = 0;  // this variable points to the current incmoning asteroid
 
-        while(i < a.length){
-            if(st.isEmpty()){
-                st.push(a[i]);
+        while(i < a.length){  // till the time we have asteroids left
+            if(st.isEmpty()){  // if stack is empty
+                st.push(a[i]); // just push
                 i++;
             }else{
-                if(st.peek() > 0 && a[i] < 0){
+                if(st.peek() > 0 && a[i] < 0){  // AST ---->  <------incmoing AST
                     // only condition of collision
-                    if(Math.abs(st.peek()) == Math.abs(a[i])){
-                        st.pop();
-                        i++;
+                    if(Math.abs(st.peek()) == Math.abs(a[i])){  // if colliding ast have same size
+                        st.pop();   // stored ast is also destroyed
+                        i++;        // incoming ast is also destroyed, that y we move to next ast
                     }else{
                         // if size is not same
-                        if(Math.abs(st.peek()) > Math.abs(a[i])){
-                            i++;
+                        if(Math.abs(st.peek()) > Math.abs(a[i])){  // stored >> incming
+                            // incoming ast will be destroyed
+                            i++;  // move to next
                         }else{
                             while(!st.isEmpty() && st.peek() > 0 && a[i] < 0 && Math.abs(st.peek()) < Math.abs(a[i])){
-                                st.pop();
+                                st.pop();  // stored ast is removed
                             }
                         }
                     }
 
                 }else{
-                    st.push(a[i]);
+                    st.push(a[i]);  // no coliision cases
                     i++;
                 }
 
