@@ -31,6 +31,7 @@ class FreqStack {
         ArrayList<Integer> arr = elementMap.get(maxFreq);
         int result = arr.get(arr.size() - 1);
         arr.remove(arr.size() - 1);
+        freqMap.put(result, freqMap.get(result) -1);
 
         if(arr.isEmpty()){
             elementMap.remove(maxFreq);
