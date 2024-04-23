@@ -19,6 +19,7 @@ MyLinkedList.prototype.get = function(index) {
         i++;
         temp = temp.next;
     }
+    if(temp == null) return -1;
     return temp.data;
 };
 
