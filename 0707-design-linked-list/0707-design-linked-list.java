@@ -17,11 +17,10 @@ class MyLinkedList {
     }
     
     public int get(int index) {
-        if(this.head == null) return -1;
         int i = 0;
         Node temp = this.head;
 
-        while( i < index && temp.next != null){
+        while( i < index && temp != null){
             i++;
             temp = temp.next;
         }
