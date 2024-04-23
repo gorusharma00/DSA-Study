@@ -44,15 +44,14 @@ class MyLinkedList {
         if(this.head == null){
             this.head = new Node(val);
             return;
+        }else{
+            Node temp = this.head;
+            while(temp.next != null){
+                temp = temp.next;
+            }
+            temp.next = new Node(val);
         }
 
-        Node newTail = new Node(val);
-        Node temp = this.head;
-        while(temp.next != null){
-            temp = temp.next;
-        }
-
-        temp.next = newTail;
     }
     
     public void addAtIndex(int index, int val) {
@@ -65,7 +64,7 @@ class MyLinkedList {
         Node prev = null;
         Node curr = this.head;
         int i = 0;
-        while( i < index && curr.next != null){
+        while( i < index && curr != null){
             prev = curr;
             curr = curr.next;
             i++;
@@ -91,7 +90,7 @@ class MyLinkedList {
         Node prev = null;
         Node nodeTobeDel = this.head;
         int i = 0;
-        while(i < index && nodeTobeDel.next != null){
+        while(i < index && nodeTobeDel != null){
             prev = nodeTobeDel;
             nodeTobeDel = nodeTobeDel.next;
             i++;
