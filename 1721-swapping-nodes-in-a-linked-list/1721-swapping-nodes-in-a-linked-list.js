@@ -33,3 +33,6 @@ var swapNodes = function(head, k) {
     return head;
 
 };
+
+// time complexity => o(n);
+// space complexity => o(1)
