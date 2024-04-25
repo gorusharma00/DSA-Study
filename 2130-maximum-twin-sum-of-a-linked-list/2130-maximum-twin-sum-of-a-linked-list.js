@@ -29,7 +29,6 @@ var pairSum = function(head) {
         curr.next = prev;
         prev = curr;
         curr = nextNode;
-        // prev.next = null;
     }
 
     let h1 = head;
