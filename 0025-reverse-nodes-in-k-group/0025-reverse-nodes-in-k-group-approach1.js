@@ -64,3 +64,6 @@ var reverseKGroup = function(head, k) {
 
     return head;
 };
+
+// time complexity => o(n) (for reversing) + o(n) for traversing => o(2n) => o(n)
+// space complexity => o(1)
