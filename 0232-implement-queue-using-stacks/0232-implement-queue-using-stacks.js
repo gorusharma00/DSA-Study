@@ -7,30 +7,30 @@ var MyQueue = function() {
  * @return {void}
  */
 MyQueue.prototype.push = function(x) {
-    this.stack.push(x);
+    let copy = [];
+    while(this.stack.length != 0){
+        copy.push(this.stack.pop());
+    }
+    copy.push(x);
+
+    while(copy.length != 0){
+        this.stack.push(copy.pop());
+    }
+
 };
 
 /**
  * @return {number}
  */
 MyQueue.prototype.pop = function() {
-    let copy = [];
-    while(this.stack.length != 0){
-        copy.push(this.stack.pop())
-    }
-    let element = copy.pop();
-
-    while(copy.length != 0){
-        this.stack.push(copy.pop());
-    }
-    return element;
+    return this.stack.pop();
 };
 
 /**
  * @return {number}
  */
 MyQueue.prototype.peek = function() {
-    return this.stack[0];
+    return this.stack[this.stack.length -1];
 };
 
 /**
