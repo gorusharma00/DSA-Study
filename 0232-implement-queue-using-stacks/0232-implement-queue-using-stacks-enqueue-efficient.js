@@ -16,12 +16,12 @@ MyQueue.prototype.push = function(x) {
 MyQueue.prototype.pop = function() {
     let copy = [];
     while(this.stack.length != 0){
-        copy.push(this.stack.pop())
+        copy.push(this.stack.pop())  // it takes o(n) time to shift
     }
     let element = copy.pop();
 
     while(copy.length != 0){
-        this.stack.push(copy.pop());
+        this.stack.push(copy.pop());  // it takes o(n-1) time to shift again after removal of one element
     }
     return element;
 };
