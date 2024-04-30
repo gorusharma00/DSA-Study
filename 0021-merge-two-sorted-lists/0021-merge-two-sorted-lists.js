@@ -11,56 +11,24 @@
  * @return {ListNode}
  */
 var mergeTwoLists = function(list1, list2) {
-    if(list1 == null && list2 == null) return null;
-
+    //base case
     if(list1 == null) return list2;
     if(list2 == null) return list1;
 
-    let temp1 = list1;
-    let temp2 = list2;
+    let result;
 
-    let dummyHead = null;
-    let curr = dummyHead;
-
-    while(temp1 != null && temp2 != null){
-        if(temp1.val < temp2.val){
-            if(curr == null){
-                dummyHead = new ListNode(temp1.val);
-                curr = dummyHead;
-            }else{
-                curr.next = new ListNode(temp1.val);
-                curr = curr.next;
-            }
-            temp1 = temp1.next;
-        } else{
-            if(curr == null){
-                dummyHead = new ListNode(temp2.val);
-                curr = dummyHead;
-            }else{
-                curr.next = new ListNode(temp2.val);
-                curr = curr.next;
-            }
-
-            temp2 = temp2.next;
-        }
-        
+    if(list1.val < list2.val){
+        result = list1;
+        result.next = mergeTwoLists(list1.next, list2);
+    }else{
+        result = list2;
+        result.next = mergeTwoLists(list1, list2.next);
     }
 
-    while(temp1 != null){
-        curr.next = new ListNode(temp1.val);
-        curr = curr.next;
-        temp1 = temp1.next;
-    }
-
-    while(temp2 != null){
-        curr.next = new ListNode(temp2.val);
-        curr = curr.next;
-        temp2 = temp2.next;
-    }
-
-    return dummyHead;
+    return result;
 };
 
-// Time Complexity: O(n + m)
+// time => O(n + m) This is because, in the worst-case scenario, 
+// the algorithm will visit each node in both lists exactly once. 
 
-// Space Complexity: O(n + m)
+// space => o(1) (ignoring recursive stack space)
