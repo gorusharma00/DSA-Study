@@ -12,28 +12,49 @@
  * @return {ListNode}
  */
 var getIntersectionNode = function(headA, headB) {
-    if(headA == null || headB == null) return null;
-
     let temp = headA;
-    let map = new Map();
+    let n1 = 0;
 
     while(temp != null){
-        map.set(temp, 1);
+        n1++;
         temp = temp.next;
     }
 
     temp = headB;
-
+    let n2 = 0;
     while(temp != null){
-        if(map.has(temp)){
-            return temp;
-        }
-
+        n2++;
         temp = temp.next;
     }
 
-    return null;
+    if(n1 < n2){
+        return collisionPoint(headA, headB, n2 - n1);
+    }else{
+        return collisionPoint(headB, headA, n1 - n2);
+    }
 };
 
-// time => o(n + m)
-// space = o(n) // n is number of nodes in first list
+function collisionPoint(t1, t2, d){
+    while(d){  // o(n2-n1)
+        d--;
+        t2 = t2.next;
+    }
+
+    while(t1 != t2){  // o(n1)
+        t1 = t1.next;
+        t2 = t2.next;
+    }
+
+    return t1;
+}
+
+/*
+Here approach is just calcualte lengths of both list,
+and then move pointer of bigger list so that they can start from
+same point.
+
+time => o(n1) + o(n2) + o(n2-n1) + o(n1) => o(n1 + 2n2);
+
+space = > o(1)
+
+*/
