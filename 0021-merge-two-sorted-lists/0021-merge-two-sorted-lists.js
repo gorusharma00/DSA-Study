@@ -60,3 +60,7 @@ var mergeTwoLists = function(list1, list2) {
 
     return dummyHead;
 };
+
+// Time Complexity: O(n + m)
+
+// Space Complexity: O(n + m)
