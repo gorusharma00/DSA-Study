@@ -12,15 +12,28 @@
  * @return {ListNode}
  */
 var getIntersectionNode = function(headA, headB) {
-    if(headA == null && headB == null) return null;
-    let temp1 = headA;
-    let temp2 = headB;
+    if(headA == null || headB == null) return null;
 
-    while(temp1 !== temp2){
-        temp1 = temp1 == null ? headB : temp1.next;
-        temp2 = temp2 == null ? headA : temp2.next;
-       
+    let temp = headA;
+    let map = new Map();
+
+    while(temp != null){
+        map.set(temp, 1);
+        temp = temp.next;
     }
 
-    return temp1;
+    temp = headB;
+
+    while(temp != null){
+        if(map.has(temp)){
+            return temp;
+        }
+
+        temp = temp.next;
+    }
+
+    return null;
 };
+
+// time => o(n + m)
+// space = o(n) // n is number of nodes in first list
