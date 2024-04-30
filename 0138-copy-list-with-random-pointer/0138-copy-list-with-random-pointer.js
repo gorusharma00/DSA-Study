@@ -14,46 +14,47 @@
 var copyRandomList = function(head) {
     if(head == null) return null;
 
+    // 1. Insert the new nodes duplicates of org in between them
     let curr = head;
-    let prev = null;
-    let newHead = null;
-    let map = new Map();
 
     while(curr != null){
-        let temp = new Node(curr.val, null, null);
-        map.set(curr, temp);  // means in map we store new node corres to org node
-        // a(org Node) => x(correspond new copy node)
-
-        if(newHead == null){
-            newHead = temp;
-            prev = newHead;
-        }else{
-            prev.next = temp;
-            prev = temp;
-        }
-
-        curr = curr.next;
+        let currNewNext = curr.next;    // A -> B
+        curr.next = new Node(curr.val);  // A -> x -> B
+        curr.next.next = currNewNext;
+        
+        curr = currNewNext;  // curr = B
     }
 
-    // fill random pointers
+    // 2.Deep copy of random pointers
     curr = head;
-    let newCurr = newHead;
 
-    while(curr != null){
+    while(curr != null && curr.next != null){
         if(curr.random == null){
-            newCurr.random = null;
+            curr.next.random = null;
         }else{
-            /* let randomFromOriginalNode = curr.random;
-            let randomCorrespondFromOrgNode = map[randomFromOriginalNode];
-
-            newCurr.random = randomCorrespondFromOrgNode;
-            */
-            newCurr.random = map.get(curr.random);
+            curr.next.random = curr.random.next;   // to undertstand see notes
         }
 
-        newCurr = newCurr.next;
-        curr = curr.next;
+        curr = curr.next.next;
     }
-    console.log(newHead);
+
+    // 3. Separate the Linked List
+    let newHead = head.next;
+    let newCurr = newHead;
+    curr = head;
+
+    while(curr != null && newCurr != null){
+        curr.next =  curr.next == null ? null :  curr.next.next;                     // instead curr.next.next we take this for precaution 
+                                            // because if curr.next go null it breaks;
+
+        newCurr.next =  newCurr.next == null ? null :  newCurr.next.next; 
+
+        curr = curr.next;
+        newCurr = newCurr.next;
+    }
+
     return newHead;
+
 };
+
+// Debatable space complexity => O(N) / O(1);
