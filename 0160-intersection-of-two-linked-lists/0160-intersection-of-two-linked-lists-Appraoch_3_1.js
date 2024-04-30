@@ -17,7 +17,7 @@ var getIntersectionNode = function(headA, headB) {
     let t1 = headA
     let t2 = headB;
 
-    while(t1 != t2){
+    while(t1 != t2){  // suppose first node is the same in both only means first node is the answer
         t1 = t1.next;
         t2 = t2.next;
 
