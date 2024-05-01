@@ -123,3 +123,6 @@ var levelOrder = function(root) {
 
     return result;
 };
+
+// time complexity => o(n) , because there will be n nodes and every nodes once push in queue, removed from queue
+// space compleixty => o(n)
