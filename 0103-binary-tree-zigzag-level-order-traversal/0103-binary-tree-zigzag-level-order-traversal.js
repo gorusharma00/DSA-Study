@@ -120,7 +120,11 @@ var zigzagLevelOrder = function(root) {
                 levelArray = new Array();
             } else {
                 // when queue is empty
-                result.push(levelArray);
+                if(zigZag == 'left'){
+                    result.push(levelArray.reverse());
+                }else{
+                    result.push(levelArray);
+                }
             }
         } else {
             levelArray.push(curr.val);
