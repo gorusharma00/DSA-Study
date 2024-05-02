@@ -146,7 +146,7 @@ If you see we have to change order when level is over, for that we can keep eye 
 as null recieved change order
 
 In this code my intuiton is that in starting the zigzag order is left to right so i store zizZag = left
-because the next order will be right to left, after pushing code i changed zigZag variable to acc. next order
+as the next order will be right to left, after pushing nodes i changed zigZag variable to acc. next order
 
-if que is empty after null just check previous order and push code acc to it
+if que is empty after null just check previous order and push node acc to it
 */
