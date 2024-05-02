@@ -111,7 +111,7 @@ var isCousins = function(root, x, y) {
         if(curr == null){
             if(!qu.isEmpty()){
                 qu.enqueue(null);
-                if(targets_at_level > 0){
+                if(targets_at_level > 0){ // one level is end check cousins at that level
                     return targets_at_level == 2;
                 }
             }
