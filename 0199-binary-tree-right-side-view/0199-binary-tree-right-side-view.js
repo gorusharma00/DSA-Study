@@ -98,22 +98,18 @@ var rightSideView = function(root) {
     qu.enqueue(null);
 
     const result = [];
-    let rightVar;
+    let rightVar; // in end it will have rightmost node;
 
     while(!qu.isEmpty()) {
         const curr = qu.front();
         qu.dequeue();
         if(curr == null) {
             result.push(rightVar)
-            // this shows end of the last level
+
             if(!qu.isEmpty()) {
-                // if the queue is not empty then in the queue we have all the elements
-                // of the next level
-                
-                // before we refresh our level array it has data of last level 
-                qu.enqueue(null); // we can use this null as a marker of end of current level
-                
+                qu.enqueue(null);     
             }
+
         } else {
             rightVar = curr.val;
             if(curr.left) {
