@@ -93,11 +93,11 @@ class CustomQueue {
 var zigzagLevelOrder = function(root) {
     if(root == null) return [];
     const qu = new CustomQueue();
-    qu.enqueue(root);
+    qu.enqueue(root);                                                       
     qu.enqueue(null);
     const result = [];
     let levelArray = new Array();
-    let zigZag = 'right';
+    let zigZag = 'left';
     while(!qu.isEmpty()) {
         const curr = qu.front();
         qu.dequeue();
@@ -108,19 +108,19 @@ var zigzagLevelOrder = function(root) {
                 // of the next level
                 
                 // before we refresh our level array it has data of last level
-                if(zigZag == 'right'){
+                if(zigZag == 'left'){
                     result.push(levelArray);
-                    zigZag = 'left'
-                }else if(zigZag = 'left'){
+                    zigZag = 'right'
+                }else if(zigZag = 'right'){
                      result.push(levelArray.reverse());
-                     zigZag = 'right'
+                     zigZag = 'left'
                 }
                 
                 qu.enqueue(null); // we can use this null as a marker of end of current level
                 levelArray = new Array();
             } else {
                 // when queue is empty
-                if(zigZag == 'left'){
+                if(zigZag == 'right'){
                     result.push(levelArray.reverse());
                 }else{
                     result.push(levelArray);
@@ -141,3 +141,7 @@ var zigzagLevelOrder = function(root) {
     
 };
 
+/* 
+In this code my intuiton is that in starting the zigzag order is left to right but i store zizZag = right
+because the next order will be right to left, and after pushing the appropriate order
+*/
