@@ -1,75 +1,32 @@
-class Node{
-    constructor(data){
-        this.data = data;
-        this.next = null;
-    }
-}
-
-class LinkedList{
+class customQueue{
+    #arr;
     constructor(){
-        this.head = null;
-        this.tail = null
-    }
-
-    removeAtHead(){
-        if(this.head == null) return;
-        let nextHead = this.head.next;
-        let value = this.head.data;
-        this.head.next = null;
-        this.head = nextHead;
-
-        if(this.head == null){
-            this.tail = null;
-        }
-
-        return value;
-    }
-
-    addAtTail(val){
-        let newTail = new Node(val);
-        if(this.head == null){
-            this.head = newTail;
-            this.tail = newTail;
-        }
-        this.tail.next = newTail;
-        this.tail = newTail;
-    }
-
-    isEmpty(){
-        return this.head == null;
-    }
-
-    getHead(){
-        if(this.head == null) return undefined;
-        return this.head.data;
-    }
-}
-
-class queue{
-    constructor(){
-        this.ll = new LinkedList();
+        this.#arr = [];
     }
 
     enqueue(val){
-        this.ll.addAtTail(val);
+        this.#arr.push(val);
     }
 
     dequeue(){
-        return this.ll.removeAtHead();
-    }
-
-    front(){
-        return this.ll.getHead();
+        return this.#arr.shift();
     }
 
     isEmpty(){
-        return this.ll.isEmpty();
+        return this.#arr.length == 0;
+    }
+
+    front(){
+        return this.#arr[0];
+    }
+
+    size(){
+        return this.#arr.length;
     }
 }
-
 var MyStack = function() {
-    this.primary_qu = new queue();
-    this.secondary_qu = new queue();
+    this.qu1 = new customQueue();
+    this.qu2 = new customQueue();
 };
 
 /** 
@@ -77,39 +34,54 @@ var MyStack = function() {
  * @return {void}
  */
 MyStack.prototype.push = function(x) {
-    this.secondary_qu.enqueue(x)
-
-    while(!this.primary_qu.isEmpty()){
-        this.secondary_qu.enqueue(this.primary_qu.front());
-        this.primary_qu.dequeue();
-    }
-
-    let q = this.primary_qu;
-    this.primary_qu = this.secondary_qu;
-    this.secondary_qu = q;
+    this.qu1.enqueue(x);
 };
 
 /**
  * @return {number}
  */
 MyStack.prototype.pop = function() {
-    if(this.primary_qu.isEmpty()) return;
+    let size = this.qu1.size();
+    let i = 0
+    while(i <= size - 2){
+        this.qu2.enqueue(this.qu1.dequeue());
+        i++;
+    }
 
-    return this.primary_qu.dequeue();
+    let popElement = this.qu1.dequeue();
+
+    let q = this.qu1;
+    this.qu1 = this.qu2;
+    this.qu2 = q;
+
+    return popElement;
 };
 
 /**
  * @return {number}
  */
 MyStack.prototype.top = function() {
-    return this.primary_qu.front()
+    let size = this.qu1.size();
+    let i = 0
+    let lastElement;
+    while(i < size){
+        lastElement = this.qu1.dequeue();
+        this.qu2.enqueue(lastElement);
+        i++;
+    }
+
+    let q = this.qu1;
+    this.qu1 = this.qu2;
+    this.qu2 = q;
+
+    return lastElement;
 };
 
 /**
  * @return {boolean}
  */
 MyStack.prototype.empty = function() {
-    return this.primary_qu.isEmpty();
+    return this.qu1.isEmpty();
 };
 
 /** 
