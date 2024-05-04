@@ -14,13 +14,15 @@ let result;
 function inorder(root){
     if(root == null) return null;
 
-    inorder(root.left)
-    result.push(root.val)
-    inorder(root.right)
-    
+    inorder(root.left);  // go to left subtree because in inorder order will be like
+                        // left-> root -> right
+    result.push(root.val);
+
+    inorder(root.right);
 }
+
 var inorderTraversal = function(root) {
     result = [];
-    inorder(root)
-    return result
+    inorder(root);
+    return result;
 };
