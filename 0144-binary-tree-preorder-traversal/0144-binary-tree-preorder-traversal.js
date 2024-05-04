@@ -12,7 +12,7 @@
  */
 let result;
 function preorder(root){
-    if(root == null) return;
+    if(root == null) return null;
     // if the root is not null; it has some data;
     // process the root
     result.push(root.val);
