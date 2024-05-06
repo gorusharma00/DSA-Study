@@ -17,7 +17,7 @@ function f(root){
     let lst = f(root.left) // lst => left subtree;
     let rst = f(root.right);
 
-    ans = ans && Math.abs(lst - rst) <= 1;
+    ans = ans && (Math.abs(lst - rst) <= 1);
     
     return 1 + Math.max(lst, rst);
 }
