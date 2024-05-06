@@ -10,18 +10,20 @@
  * @param {TreeNode} root
  * @return {TreeNode}
  */
-function preorder(root){
+function f(root){
     if(root == null) return;
 
     let temp = root.left;
     root.left = root.right;
     root.right = temp;
 
-    preorder(root.left);
-    preorder(root.right);
+    f(root.left);
+    f(root.right);
 }
 
 var invertTree = function(root) {
-    preorder(root);
+    f(root);
     return root;
 };
+
+// time complexity => o(n)
