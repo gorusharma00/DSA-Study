@@ -11,21 +11,25 @@
  * @param {TreeNode} subRoot
  * @return {boolean}
  */
-let ans;
 function f(root, subroot){
-    if (root == null && subroot == null) return true;
-    if (root == null || subroot == null) return false;
+    if(root == null &&  subroot == null){
+        return true;
+    }
+    if(root == null || subroot == null){
+        return false;
+    }
 
-    return (root.val == subroot.val) && f(root.left, subroot.left) && f(root.right, subroot.right);
-    
+    return root.val == subroot.val && f(root.left, subroot.left) && f(root.right, subroot.right);
 }
 
 var isSubtree = function(root, subRoot) {
-    if (subRoot == null) return true; // An empty tree is a subtree of any tree
-    if (root == null) return false; // An empty tree can't contain a non-empty subtree
-    // Check if the tree rooted at the current node is identical to subRoot
+    if(subRoot == null) return true;
+    if(root == null) return false;
 
-    if(f(root, subRoot)) return true;
+    if(f(root, subRoot)) return true;  // means trees are same
 
-    return isSubtree(root.left, subRoot) || isSubtree(root.right, subRoot);
+    let left = isSubtree(root.left, subRoot);  
+    let right = isSubtree(root.right, subRoot);
+
+    return left || right;
 };
