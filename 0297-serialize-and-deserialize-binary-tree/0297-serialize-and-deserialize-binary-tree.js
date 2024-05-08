@@ -14,23 +14,9 @@
  */
 
 var serialize = function(root) {
-    if(!root) return "";
+    if(!root) return "#";
 
-    let str = ""
-    let qu = [];
-    qu.push(root);
-    while(qu.length > 0){
-        let curr = qu.shift();
-
-        if(curr === null){
-            str += "#,";
-        }else{
-            str += curr.val + ",";
-            qu.push(curr.left);
-            qu.push(curr.right);
-        }
-    }
-    return str
+    return root.val + "," + serialize(root.left) + "," + serialize(root.right);
 };
 
 /**
@@ -39,37 +25,25 @@ var serialize = function(root) {
  * @param {string} data
  * @return {TreeNode}
  */
+function buildTree(s){
+    let val = s.shift();
+
+    if(val === "#"){
+        return null;
+    }
+
+    let node = new TreeNode(parseInt(val));
+    node.left = buildTree(s)
+    node.right = buildTree(s);
+
+    return node;
+}
+
 var deserialize = function(data) {
     if(data === "") return null;
 
     let s = data.split(",");
-    let qu = [];
-
-    let rootVal = s.shift();
-    let root = new TreeNode(parseInt(rootVal));
-
-    qu.push(root);
-
-    while(qu.length > 0){
-        let node = qu.shift();
-
-        let leftVal = s.shift();
-
-        if(leftVal !== "#"){
-            let leftNode = new TreeNode(parseInt(leftVal));
-            node.left = leftNode;
-            qu.push(leftNode);
-        }
-
-        let rightVal = s.shift();
-
-        if(rightVal !== "#"){
-            let rightNode = new TreeNode(parseInt(rightVal));
-            node.right = rightNode;
-            qu.push(rightNode);
-        }
-    }
-    return root;
+    return buildTree(s);
 };
 
 /**
