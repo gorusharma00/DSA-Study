@@ -23,7 +23,7 @@ function f(root, subroot){
 }
 
 var isSubtree = function(root, subRoot) {
-    if(subRoot == null) return true;
+    if(subRoot == null) return true;  // an empty tree is subtree
     if(root == null) return false;
 
     if(f(root, subRoot)) return true;  // means trees are same
@@ -33,3 +33,6 @@ var isSubtree = function(root, subRoot) {
 
     return left || right;
 };
+
+
+// time complexity => o(root * subroot);
