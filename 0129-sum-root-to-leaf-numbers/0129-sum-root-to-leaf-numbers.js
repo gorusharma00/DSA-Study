@@ -13,7 +13,7 @@
 let ans;
 function f(root, num){
 
-    if(root.left == null && root.right == null) {
+    if(root.left == null && root.right == null) {  // when we hit leaft node 
         ans += (10*num + root.val);
         return;
     }
