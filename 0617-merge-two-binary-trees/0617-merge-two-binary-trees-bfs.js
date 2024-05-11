@@ -14,7 +14,7 @@
 var mergeTrees = function(root1, root2) {
     if(!root1) return root2;
     if(!root2) return root1;
-    
+
     let qu1 = [];
     let qu2 = [];
 
@@ -32,8 +32,15 @@ var mergeTrees = function(root1, root2) {
             curr1.left = curr2.left
         }else if(curr1.left && curr2.left){
             qu1.push(curr1.left);
-            qu2.push(curr2.left);
+            qu2.push(curr2.left);     
+
         }
+
+        /*
+        In cases where curr2.left or curr2.right does not exist, 
+        there's no explicit action taken because there's nothing 
+        from root2 to add or merge into root1 at that position.
+        */
 
         if(!curr1.right && curr2.right){
             curr1.right = curr2.right;
