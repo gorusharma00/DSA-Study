@@ -11,18 +11,44 @@
  * @param {TreeNode} root2
  * @return {TreeNode}
  */
-function f(root1, root2){
-    if(root1 == null) return root2
-    if(root2 == null) return root1
+var mergeTrees = function(root1, root2) {
+    if(!root1) return root2;
+    if(!root2) return root1;
 
+    let qu1 = [];
+    let qu2 = [];
 
-    let root = new TreeNode(root1.val + root2.val);
+    qu1.push(root1);
+    qu2.push(root2);
+    let root = root1;
 
-    root.left = f(root1.left, root2.left);
-    root.right = f(root1.right, root2.right);
+    while(qu1.length > 0 || qu2.length > 0){
+        let curr1 = qu1.shift();
+        let curr2 = qu2.shift();
+
+        curr1.val += curr2.val;
+
+        if(!curr1.left && curr2.left){
+            curr1.left = curr2.left
+        }else if(curr1.left && curr2.left){
+            qu1.push(curr1.left);
+            qu2.push(curr2.left);     
+
+        }
+
+        /*
+        In cases where curr2.left or curr2.right does not exist, 
+        there's no explicit action taken because there's nothing 
+        from root2 to add or merge into root1 at that position.
+        */
+
+        if(!curr1.right && curr2.right){
+            curr1.right = curr2.right;
+        }else if(curr1.right && curr2.right){
+            qu1.push(curr1.right);
+            qu2.push(curr2.right);
+        }
+    }
 
     return root;
-}
-var mergeTrees = function(root1, root2) {
-    return f(root1, root2);
 };
