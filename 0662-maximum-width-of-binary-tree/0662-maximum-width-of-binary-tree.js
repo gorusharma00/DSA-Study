@@ -12,40 +12,41 @@
  */
 var widthOfBinaryTree = function(root) {
     let qu = [];
-
-    let ans = 0;
-
-    let left = null;
+ 
+    let ans = 0n;
+ 
+    let left = BigInt(0);
     let right = null;
     let last = null;
-
-    qu.push([root, 0]);
+ 
+    qu.push([root, 0n]);
     qu.push(null);
-
+ 
     while(qu.length > 0){
-
+ 
         let element = qu.shift();
-
+ 
         if(element == null){
-            right = last[1];
-            ans = Math.max(ans, right - left + 1);
-
+            right = BigInt(last[1]);
+            // ans = Math.max(ans, right - left + 1n);
+            if(ans < right - left + 1n) {
+                ans = right - left + 1n;
+            }
+ 
             if(qu.length != 0){
                 qu.push(null);
-                left = qu[0][1];
-            }else{
-                ans = Math.max(ans, right - left + 1);
+                left = BigInt(qu[0][1]);
             }
-
+            // console.log(left, right,right - left + 1n, ans )
         }else{
             last = element;
-
+ 
             if(element[0].left){
-                qu.push([element[0].left, element[1] * 2 + 1]);
+                qu.push([element[0].left, BigInt(element[1] * 2n + 1n)]);
             }
-
+ 
             if(element[0].right){
-                qu.push([element[0].right, element[1] * 2 + 2]);
+                qu.push([element[0].right, BigInt(element[1] * 2n + 2n)]);
             }
         }
     }
