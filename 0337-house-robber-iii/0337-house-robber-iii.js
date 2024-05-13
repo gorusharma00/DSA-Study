@@ -10,32 +10,42 @@
  * @param {TreeNode} root
  * @return {number}
  */
-let map;
-function f(root){
+let mpTrue;
+let mpFalse;
+
+function f(root, isPR){
     if(root == null) return 0;
 
-    if(map.has(root)) return map.get(root);
-
-    let ans = 0;
-
-    if(root.left != null){
-        ans += f(root.left.left) + f(root.left.right);
+    if(isPR && mpTrue.has(root)){
+        return mpTrue.get(root);
     }
 
-    if(root.right != null){
-        ans += f(root.right.left) + f(root.right.right)
+    if(!isPR && mpFalse.has(root)){
+        return mpFalse.get(root);
     }
-    
-    ans = Math.max(ans + root.val , f(root.left) + f(root.right));
-    map.set(root, ans)
-    
-    return ans;
+
+    if(!isPR){
+        // if parent is not robbed either we can take curr node or not.
+        const leave = f(root.left, false) + f(root.right, false) // means if we leave it can be parent of any other node downwards
+        const take = root.val + f(root.left, true) + f(root.right, true);
+
+        const ans = Math.max(leave, take);
+
+        mpFalse.set(root, ans);
+        return ans;
+    }else{
+        // if parent is robbed
+        const leave = f(root.left, false) + f(root.right, false);
+
+        const ans = leave;
+        mpTrue.set(root, ans);
+        return ans;
+    }
 }
 
 var rob = function(root) {
-    map = new Map();
-    return f(root);
-}
+    mpTrue = new Map();
+    mpFalse = new Map();
 
-// time complexity = o(n)
-// space complexity = o(n) bec. of hasmap
+    return f(root);
+};
