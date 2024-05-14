@@ -11,7 +11,7 @@
  * @param {number} key
  * @return {TreeNode}
  */
-function minValNode(root){
+function minValNode(root){ // find lowest node and return that node
     let curr = root;
     // think smallest value in bst always ive in left side
     while(curr != null && curr.left != null){
