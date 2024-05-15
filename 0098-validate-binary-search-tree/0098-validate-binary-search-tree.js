@@ -17,7 +17,7 @@ function f(root){
 
     f(root.left);
 
-    if(root.val < lastVal){
+    if(root.val <= lastVal){
         bool = false;
     }
     lastVal = root.val;
