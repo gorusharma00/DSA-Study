@@ -10,24 +10,25 @@
  * @param {TreeNode} root
  * @return {boolean}
  */
-let lastVal;
-let bool;
-function f(root){
-    if(root == null) return;
+function f(root, min, max){
+    if(root == null) return true;
 
-    f(root.left);
-
-    if(root.val <= lastVal){
-        bool = false;
+    if(min != null && min >= root.val){
+        return false;
     }
-    lastVal = root.val;
 
-    f(root.right);
-    
+    if(max != null && max <= root.val){
+        return false;
+    }
+
+    // if any condition of above returns false ans will be false;
+    if(!f(root.left, min, root.val) || !f(root.right, root.val, max)){
+        return false;
+    }
+
+    return true;
+
 }
 var isValidBST = function(root) {
-    lastVal = -Infinity;
-    bool = true;
-    f(root);
-    return bool;
+    return f(root, null, null);
 };
