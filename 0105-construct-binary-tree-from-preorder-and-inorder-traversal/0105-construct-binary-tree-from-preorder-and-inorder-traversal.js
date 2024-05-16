@@ -11,14 +11,15 @@
  * @param {number[]} inorder
  * @return {TreeNode}
  */
-let idx; 
+let mp; 
+let idx;
 function f(preorder, inorder, start, end){
     if(start > end){
         return null;
     }
 
     let rootVal = preorder[idx]; // it gives value where idx points in preorder
-    let i = inorder.findIndex((el) => el == rootVal);
+    let i = mp[rootVal];  
     idx++;
 
     let root = new TreeNode(rootVal);
@@ -33,6 +34,11 @@ var buildTree = function(preorder, inorder) {
     let n = preorder.length // both pre and inorder are of same length becoz same tree
 
     idx = 0;
+    mp = {};
+
+    for(let i = 0; i < n; i++){
+        mp[inorder[i]] = i;
+    }
 
     return f(preorder, inorder, 0, n-1);
 };
