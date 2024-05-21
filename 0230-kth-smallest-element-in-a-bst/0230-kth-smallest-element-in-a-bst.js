@@ -22,5 +22,7 @@ function f(root){
 var kthSmallest = function(root, k) {
     arr = [];
     f(root);
-    return arr[k - 1];
+    return arr[k-1] // because k is 1- indexed.
 };
+
+// we know if we do inorder on bst we get sorted tree.
