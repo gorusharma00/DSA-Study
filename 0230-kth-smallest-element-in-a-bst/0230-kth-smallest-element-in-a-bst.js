@@ -11,18 +11,24 @@
  * @param {number} k
  * @return {number}
  */
-let arr;
+let res;
+let count;
+
 function f(root){
-    if(root == null) return null;
+    if(root == null) return;
 
     f(root.left);
-    arr.push(root.val);
+
+    count--;
+    if(count == 0){
+        res = root.val;
+    }
+    
     f(root.right);
 }
-var kthSmallest = function(root, k) {
-    arr = [];
-    f(root);
-    return arr[k-1] // because k is 1- indexed.
-};
 
-// we know if we do inorder on bst we get sorted tree.
+var kthSmallest = function(root, k) {
+    count = k;
+    f(root);
+    return res;
+};
