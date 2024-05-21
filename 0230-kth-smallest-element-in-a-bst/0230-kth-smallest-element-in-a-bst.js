@@ -22,6 +22,7 @@ function f(root){
     count--;
     if(count == 0){
         res = root.val;
+        return; // to stop further traversal.
     }
     
     f(root.right);
@@ -29,6 +30,7 @@ function f(root){
 
 var kthSmallest = function(root, k) {
     count = k;
+    res = null;
     f(root);
     return res;
 };
