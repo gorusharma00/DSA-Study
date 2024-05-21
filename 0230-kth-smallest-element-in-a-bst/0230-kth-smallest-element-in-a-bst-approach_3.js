@@ -34,3 +34,10 @@ var kthSmallest = function(root, k) {
     f(root);
     return res;
 };
+
+/*
+Time Complexity: O(N)
+
+Space Complexity: O(H), where H is the height of the tree (worst case O(N))
+
+*/
