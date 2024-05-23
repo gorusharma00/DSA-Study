@@ -26,3 +26,5 @@ function f(root, val){
 var searchBST = function(root, val) {
     return f(root, val);
 };
+
+// tc => o(logn)
