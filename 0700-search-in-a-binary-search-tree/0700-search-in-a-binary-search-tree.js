@@ -11,20 +11,14 @@
  * @param {number} val
  * @return {TreeNode}
  */
-function f(root, val){
-    if(root == null) return null;
-
-    if(root.val < val){
-        return f(root.right, val)
-    } else if(root.val > val){
-        return f(root.left, val);
-    }else {
-        return root;
+var searchBST = function(root, val) {
+    let curr = root;
+    
+    while(curr != null){
+        if(curr.val < val) curr = curr.right;
+        else if(curr.val > val) curr = curr.left;
+        else return curr;
     }
 
-}
-var searchBST = function(root, val) {
-    return f(root, val);
+    return null;
 };
-
-// tc => o(logn)
