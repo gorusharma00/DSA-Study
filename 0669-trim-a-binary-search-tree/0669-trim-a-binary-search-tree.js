@@ -12,22 +12,21 @@
  * @param {number} high
  * @return {TreeNode}
  */
-var trimBST = function (root, low, high) {
+function f(root, low, high){
+    if(root == null) return null;
 
-	if (!root) {
-		return null;
-	}
+    if(root.val < low){
+        return f(root.right, low, high);
+    }else if(root.val > high){
+        return f(root.left, low, high);
+    }else{
+        root.left = f(root.left, low, high);
+        root.right = f(root.right, low, high);
+    }
 
-	if (root.val < low) {
-		return trimBST(root.right, low, high);
-	}
+    return root;
+}   
 
-	if (root.val > high) {
-		return trimBST(root.left, low, high);
-	}
-
-	root.left  = trimBST(root.left, low, high);
-	root.right = trimBST(root.right, low, high);
-
-	return root;
-};
+var trimBST = function(root, low, high) {
+    return f(root, low, high);
+}
