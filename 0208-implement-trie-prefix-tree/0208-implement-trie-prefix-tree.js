@@ -27,7 +27,9 @@ Trie.prototype.insert = function(word) {
         }
     }
     // when the loop ends curr is at the node of last char
-    curr.isTerminal = true;
+    curr.isTerminal = true; // we return like this think if you have same prefix 
+                            // which is equal to given word but word is not present it's just prefix
+                            // in that case we have to check
 };
 
 /** 
