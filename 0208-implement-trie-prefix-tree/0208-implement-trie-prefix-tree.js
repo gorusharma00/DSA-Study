@@ -18,6 +18,7 @@ Trie.prototype.insert = function(word) {
     for(let i = 0; i < word.length; i++){
         let ch = word[i];
         if(curr.children[ch]){
+             // if the child is present
             curr = curr.children[ch];
         }else{
             let n = new Node(ch);
