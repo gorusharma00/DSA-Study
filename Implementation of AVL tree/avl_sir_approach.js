@@ -117,6 +117,84 @@ class Avl{
         return alpha;  // bf is already 1, -1 or 0
     }
 
+    deleteinAVL(key){
+        this.root = this.delete(this.root, key)
+    }
+
+    delete(alpha, key){ // aplha => root
+        if(alpha == null) return null;
+
+        if(alpha.data < key){
+            // go in right
+            alpha.right = this.delete(alpha.right, key);
+        }else if(alpha.data > key){
+            // go in left
+            alpha.left = this.delete(alpha.left, key);
+        }else{
+            // where we find alpha.data == key, that is we have to delete
+            if(alpha.left == null && alpha.right == null){
+                // case where we find leaf node
+                return null;
+            }else if(alpha.left == null){
+                // case where subtree has only one child either left or right
+                return alpha.right
+            }else if(alpha.right == null){
+                return alpha.left;
+            }else{
+
+                // case where subtress has both child
+                
+                let temp = alpha.right;
+                while(temp != null && temp.left != null){
+                    temp = temp.left;
+                }
+
+                alpha.data = temp.data;
+                alpha.right = this.delete(alpha.right, temp.data);
+            }
+            // update the heiht as data has been deleted
+            alpha.height = Math.max(this.height(alpha.left), this.height(alpha.right)) + 1;
+    
+            
+            // start balancing
+    
+            const bf = this.getBF(alpha);
+    
+            // if the bf is greater than 1 or less than -1, we have root unbalanced
+            if(bf > 1){
+                // tree is left heavy
+                // how to decide if we need to do right rotation or left right rotation
+                let beta = alpha.left;
+    
+                if(key < beta.data){
+                    // right rotation
+                    return this.rightRotate(alpha);
+                }else{
+                    // left right roation
+                    alpha.left = this.leftRotate(alpha.left);
+                    return this.rightRotate(alpha);
+                }
+    
+            }else if(bf < -1){
+                // tree is right heavy
+                // how to deciode if we need to do left roation or right left roation
+                let beta = alpha.right;
+    
+                if(key > beta.data){
+                    // left rotate
+                    return this.leftRotate(alpha);
+                }else{
+                    // right left rotate
+                    alpha.right = this.rightRotate(alpha.right);
+                    return this.leftRotate(alpha);
+                }
+            }
+        }
+
+
+        return alpha;
+    }
+
     preorder(root, result) {
         if(root == null) return null;
         // If th›e root is not null, that means it has some data
@@ -166,12 +244,13 @@ let avl = new Avl();
 avl.insertinAVL(1);
 avl.insertinAVL(2);
 avl.insertinAVL(3);
-avl.insertinAVL(3);
 avl.insertinAVL(4);
 avl.insertinAVL(5);
 avl.insertinAVL(6);
 avl.insertinAVL(8);
+avl.deleteinAVL(5);
 avl.insertinAVL(9);
+avl.deleteinAVL(8);
 
 const pre = avl.preorderTraversal();
 const inorder = avl.inorderTraversal();
