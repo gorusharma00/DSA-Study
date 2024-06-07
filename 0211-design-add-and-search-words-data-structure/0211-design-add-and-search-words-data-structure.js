@@ -41,7 +41,7 @@ function searchUtil(root, word){
         let ch = word[i];
         if(ch == "."){
             for(let j = 0; j < 26; j++){
-                if(curr.children[String.fromCharCode(97 + j)] != null){
+                if(curr.children[String.fromCharCode(97 + j)] != null){ // finds curr.children has a, b, c etc..
                     if(searchUtil(curr.children[String.fromCharCode(97 + j)], word.substring(i+1))){
                         return true;
                     }
