@@ -3,7 +3,7 @@
  * @param {number} k
  * @return {number}
  */
-class MaxHeap{
+class MinHeap{
     constructor(){
         this.arr = [];
     }
@@ -14,8 +14,8 @@ class MaxHeap{
             // till the time idx doesnt reach the root
             let pi = Math.floor((idx - 1)/ 2);
             
-            if(this.arr[pi] < this.arr[idx]){
-                // parent is smaller than current element
+            if(this.arr[pi] > this.arr[idx]){
+                // parent is greater than current element
 
                 // swap the parent and child
                 let temp = this.arr[pi];
@@ -45,19 +45,19 @@ class MaxHeap{
             let rc = 2 * idx + 2; // possible rc index
             let maxEl = idx; // assume root is the max
 
-            if(lc < this.arr.length && this.arr[maxEl] < this.arr[lc]){
-                // left child exist and is greater also
+            if(lc < this.arr.length && this.arr[maxEl] > this.arr[lc]){
+                // left child exist and is smaller also
                 maxEl = lc;
             }
 
-            if(rc < this.arr.length && this.arr[maxEl] < this.arr[rc]){
-                // right child exist && is greater also
+            if(rc < this.arr.length && this.arr[maxEl] > this.arr[rc]){
+                // right child exist && is samller also
                 maxEl = rc;
             }
 
-            // after the above comparison we klnow the biggest element
+            // after the above comparison we know the smallest element
             if(idx == maxEl){
-                // root is still the biggest element, dont go further
+                // root is still the smallest element, dont go further
                 break;
             }else{
                 // swap the element of root and maxEl
@@ -93,19 +93,22 @@ class MaxHeap{
     }
 }
 var findKthLargest = function(nums, k) {
-    let heap = new MaxHeap();
+    let heap = new MinHeap();
 
     for(let i = 0; i < nums.length; i++){
-        // insert all elements into heap
-        heap.insert(nums[i]);
+        if(i < k){
+            // create k size heap
+            heap.insert(nums[i]);
+        }else{
+            if(nums[i] < heap.get()) continue; // if element is smaller don't take it
+            else{
+                heap.remove();
+                heap.insert(nums[i]);
+            }
+        }
     }
-
-    // now do k-1 removal to get ans as our root
-    for(let i = k - 1; i > 0; i--){
-        heap.remove();
-    }
-
+    // we get kth largest element as our root
     return heap.get();
 };
 
-// tc => (k-1) logn  1 removal takes logn time
+// tc => n log(k)
