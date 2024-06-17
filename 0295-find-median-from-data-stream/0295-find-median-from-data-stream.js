@@ -123,11 +123,16 @@ MedianFinder.prototype.addNum = function(num) {
     }else{
         this.rightMinHeap.insert(num);
     }
+    // we keep left heap may be greater but it cant not be greater than 1;
+    let diff = this.leftMaxHeap.size() - this.rightMinHeap.size();
 
-    if(this.rightMinHeap.size() - this.leftMaxHeap.size() >= 1){
-        let el = this.rightMinHeap.get();
+    if(Math.abs(diff) > 1){
+        let el = this.leftMaxHeap.get();
+        this.leftMaxHeap.remove();
+        this.rightMinHeap.insert(el);
+    }else if(this.leftMaxHeap.size() < this.rightMinHeap.size() ){
+        this.leftMaxHeap.insert(this.rightMinHeap.get());
         this.rightMinHeap.remove();
-        this.leftMaxHeap.insert(el);
     }
 };
 
@@ -138,6 +143,7 @@ MedianFinder.prototype.findMedian = function() {
     let size = this.leftMaxHeap.size() + this.rightMinHeap.size();
 
     if(size % 2 == 0){
+        console.log(this.leftMaxHeap.get(), this.rightMinHeap.get())
         return (this.leftMaxHeap.get() + this.rightMinHeap.get()) / 2;
     }else{
         return this.leftMaxHeap.get();
