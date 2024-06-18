@@ -25,11 +25,10 @@ var reorganizeString = function(s) {
 
     let result = new Array(s.length);
     let i = 0
-    while(maxfreq > 0){
+    while(map[maxfreqCh] > 0){
         result[i] = maxfreqCh;
         map[maxfreqCh]--;
         i += 2;
-        maxfreq--;
     }
     
     for(let ch in map){
