@@ -111,34 +111,34 @@ class Worker{
     }
 }
 var mincostToHireWorkers = function(quality, wage, k) {
-    let workers = [];
+    let workers = []; // to store the obj
     for(let i = 0; i < quality.length; i++){
         let ratio = wage[i] / quality[i];
-        workers.push(new Worker(ratio, quality[i]));
+        workers.push(new Worker(ratio, quality[i]));  // stores the obj of ratio and quality
     }
 
-    workers.sort((a, b) => a.ratio - b.ratio);
+    workers.sort((a, b) => a.ratio - b.ratio);  // sort the ratio 
     
     let hp = new Heap((a, b) => {
-        return a.quality < b.quality
+        return a.quality < b.quality  // max heap of quality as we need high quality elements on top for removal
     });
 
     let ans = +Infinity;
     let totalQuality = 0;
 
     for(let i = 0; i < workers.length; i++){
-        totalQuality += workers[i].quality;
+        totalQuality += workers[i].quality;   // add all quality as we iterate on array so we don't have to peek again and again in heap
         let ratio = workers[i].ratio;
 
         hp.insert(workers[i]);
 
         if(hp.size() > k){
-            totalQuality -= hp.get().quality;
+            totalQuality -= hp.get().quality;  // remove that will be high as we get better one
             hp.remove();
         }
 
         if(hp.size() == k){
-            ans = Math.min(ans, totalQuality * ratio);
+            ans = Math.min(ans, totalQuality * ratio);  // multiply which has better ratio with low qaulity that's wy we sort ratio
         }
         
     }
