@@ -5,26 +5,19 @@
  * @param {number} destination
  * @return {boolean}
  */
-function bfs(src, dest, graph, visited){
-    if(src == dest) return true  // corner case
-    const qu = []   // used temp queue u should use oringinal queue
+function dfs(src, dest, graph, visited){
+    if(src == dest) return true;
 
-    visited.add(src)
-    qu.push(src);
+    let ans = false;
+    visited.add(src);  // mark scr as visited
 
-    while(!(qu.length == 0)){
-        const el = qu.shift();
-
-        for(let neighbour of graph[el]){
-            if(neighbour == dest) return true;
-            if(!visited.has(neighbour)){
-                qu.push(neighbour);
-                visited.add(neighbour);
-            }
+    for(const neighbour of graph[src]) {
+        if(!visited.has(neighbour)) {
+            // if we have not already visited the neighbour go
+            ans = ans || dfs(neighbour, dest, graph, visited);
         }
     }
-
-    return false;
+    return ans;
 }
 
 var validPath = function(n, edges, source, destination) {
@@ -41,5 +34,5 @@ var validPath = function(n, edges, source, destination) {
         graph[v].push(u);
     }
 
-    return bfs(source, destination, graph, new Set())   // set for keeping track of visited edges   
+    return dfs(source, destination, graph, new Set())   // set for keeping track of visited edges
 };
