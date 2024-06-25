@@ -8,9 +8,9 @@ let neigbour = [[-1, 0], [0,-1], [1,0], [0,1]];
 
 function bfs(i, j, grid1, grid2){
     let qu = [];
-    let arr = [];
+    let arr = []; // to store index of island of grid2
     qu.push([i, j]);
-    grid2[i][j] = -1;
+    grid2[i][j] = -1;  // mark as visited
     arr.push([i, j]);
     
     while(!(qu.length == 0)){
@@ -31,9 +31,9 @@ function bfs(i, j, grid1, grid2){
     for(let el of arr){
         let x = el[0];
         let y = el[1];
-        if(grid1[x][y] == 0) return;
+        if(grid1[x][y] == 0) return;  // if no land in grid1 on index of island of grid2
     }
-    result++;
+    result++;  // inc the no subisland
 }
 
 var countSubIslands = function(grid1, grid2) {
