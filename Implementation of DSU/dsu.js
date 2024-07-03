@@ -1,8 +1,8 @@
 function UNION(x, y, parent, size){
     // parent is the dsu array
 
-    let xRoot = find(x)  // find parent of x
-    let yRoot = find(y)
+    let xRoot = find(x, parent)  // find parent of x
+    let yRoot = find(y, parent)
     
     if(xRoot == yRoot) return; // x and y both have same parent
 
@@ -17,7 +17,7 @@ function UNION(x, y, parent, size){
     }
 }
 
-function find(x){
+function find(x, parent){
     if(parent[x] === x) return x // given x is parent
     parent[x] = find(x);  // for path compression attach
 
